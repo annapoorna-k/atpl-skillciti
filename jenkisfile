@@ -1,5 +1,11 @@
-Definition: Pipeline script from SCM
-SCM: Git
-Repository URL: https://github.com/user/repo.git
-Branch: */main
-Script Path: Jenkinsfile
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Hello'
+            }
+        }
+    }
+}
