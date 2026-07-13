@@ -1,0 +1,97 @@
+trigger:
+- main
+
+variables:
+- template: variables.yml
+
+pool:
+  vmImage: $(vmImage)
+
+stages:
+
+# ===========================
+# Build Stage
+# ===========================
+- stage: Build
+  displayName: Build and Push Docker Image
+
+  jobs:
+  - job: Build
+    displayName: Build Image
+
+    steps:
+
+    - checkout: self
+
+    # Debug - List repository files
+    - script: |
+        echo "=============================="
+        echo "Current directory:"
+        pwd
+        echo ""
+        echo "Repository contents:"
+        find .
+        echo "=============================="
+      displayName: "List Repository Files"
+
+    - task: Docker@2
+      displayName: Login to ACR
+      inputs:
+        command: login
+        containerRegistry: $(acrServiceConnection)
+
+    - task: Docker@2
+      displayName: Build and Push Image
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: Dockerfile
+        containerRegistry: $(acrServiceConnection)
+        tags: |
+          $(imageTag)
+          latest
+
+# ===========================
+# Deploy Stage
+# ===========================
+- stage: Deploy
+  displayName: Deploy to AKS
+  dependsOn: Build
+
+  jobs:
+  - deployment: DeployToAKS
+    displayName: Deploy Application
+    environment: aks
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+
+          - checkout: self
+
+          # Debug - List repository files
+          - script: |
+              echo "=============================="
+              echo "Current directory:"
+              pwd
+              echo ""
+              echo "Repository contents:"
+              find .
+              echo "=============================="
+            displayName: "List Repository Files"
+
+          - task: KubernetesManifest@1
+            displayName: Deploy to AKS
+            inputs:
+              action: deploy
+              kubernetesServiceConnection: $(kubernetesServiceConnection)
+              namespace: $(namespace)
+
+              manifests: |
+                k8s/deployment.yml
+                k8s/service.yml
+
+              containers: |
+                $(acrLoginServer)/$(imageRepository):$(imageTag)
