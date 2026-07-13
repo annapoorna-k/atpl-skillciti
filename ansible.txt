@@ -1,0 +1,150 @@
+1. Introduction
+
+	Ansible is an open-source automation tool used for:
+
+	Configuration Management
+	Application Deployment
+	Infrastructure Provisioning
+
+	 It automates tasks across multiple servers using simple YAML files.
+
+ 2. Key Features
+	Agentless (no installation on target nodes)
+	Uses SSH for communication
+	Easy to learn (YAML syntax)
+	Idempotent (runs only when changes are needed)
+	Fast and efficient
+ 3. Architecture
+	--Control Node
+	Machine where Ansible is installed
+	Executes playbooks
+	Connects to servers
+	--Managed Nodes (Target Nodes)
+	Remote servers controlled by Ansible
+	No need to install Ansible
+	Flow
+	Control Node → SSH → Managed Nodes
+ 4. Installation
+	On Amazon Linux / RHEL:
+	sudo yum install ansible -y
+	Verify:
+	ansible --version
+ 5. Inventory File
+
+	 Inventory file contains list of servers.
+
+	Example (hosts.ini)
+	[web]
+	172.31.74.137
+	172.31.74.231
+
+	[web:vars]
+	ansible_user=ec2-user
+	ansible_ssh_private_key_file=mykey.pem
+ 6. Ad-hoc Commands
+
+	 Used for quick tasks.
+
+	Ping servers
+	ansible -i hosts.ini web -m ping
+	Install nginx
+	ansible -i hosts.ini web -m yum -a "name=nginx state=present" -b
+ 7. Playbooks
+
+	 Playbooks are YAML files used for automation.
+
+	Example (sample.yml)
+	---
+	- name: Install and start nginx
+	  hosts: web
+	  become: yes
+
+	  tasks:
+		- name: Install nginx
+		  yum:
+			name: nginx
+			state: present
+
+		- name: Start nginx
+		  service:
+			name: nginx
+			state: started
+ 8. Run Playbook
+	ansible-playbook -i hosts.ini sample.yml
+ 9. Important Modules
+	Module	Purpose
+	ping	Check connectivity
+	yum/apt	Install packages
+	service	Manage services
+	copy	Copy files
+	file	Manage files/directories
+	user	Create users
+ 10. Variables
+	vars:
+	  package_name: nginx
+
+	Usage:
+
+	name: "{{ package_name }}"
+ 11. Idempotency
+
+	 Ansible only makes changes if required.
+
+	Example:
+
+	If nginx already installed → no change
+	If not installed → installs it
+	 12. Handlers
+
+	 Used to trigger actions (like restart)
+
+	handlers:
+	  - name: restart nginx
+		service:
+		  name: nginx
+		  state: restarted
+ 13. Roles (Advanced)
+
+	 Organize playbooks into folders.
+
+	Structure:
+
+	roles/
+	  web/
+		tasks/
+		handlers/
+		vars/
+ 14. Best Practices
+	Use roles for large projects
+	Keep inventory clean
+	Use variables
+	Avoid hardcoding values
+Test using --check
+ 15. Common Commands
+	ansible --version
+	ansible-inventory -i hosts.ini --list
+	ansible-playbook sample.yml --check
+	ansible-playbook sample.yml -vvv
+ 16. Real-Time Use Case
+
+	 Deploy nginx on multiple servers:
+
+	Create inventory
+	Write playbook
+	Run playbook
+
+	✔ Saves time
+	✔ Avoids manual errors
+
+ 17. Advantages
+	Simple and readable
+	No agents required
+	Scalable
+	Powerful automation
+ 18. Limitations
+	Slower than agent-based tools for very large infra
+	Requires SSH access
+	YAML indentation errors possible
+19. Conclusion
+
+	Ansible is a powerful automation tool widely used in DevOps for managing infrastructure efficiently and reliably.

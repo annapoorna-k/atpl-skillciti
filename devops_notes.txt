@@ -1,0 +1,328 @@
+           Introduction to DevOps
+ Definition of  Devops:
+DevOps is a culture and set of practices that improves collaboration between developers and operations teams to build, test, and release software quickly and efficiently.
+DevOps is a combination of:
+•	Development (Dev) 
+•	Operations (Ops)  
+It is a process/methodology that helps teams:
+•	Build software faster 
+•	Deliver updates quickly 
+•	Improve collaboration 
+________________________________________
+Goal of DevOps
+•	Faster delivery 
+•	High quality software  
+•	Automation 
+•	Continuous improvement  
+________________________________________
+Traditional  vs  Devops
+ Traditional Model
+•	Dev & Ops teams work separately 
+•	Slow releases 
+•	More errors 
+DevOps Model	
+•	Dev & Ops work together 
+•	Fast releases 
+•	Automated processes 
+________________________________________
+DevOps Lifecycle
+1.	Planning 
+2.	Development 
+3.	Build 
+4.	Testing  
+5.	Release  
+6.	Deploy  
+7.	Operate  
+8.	Monitor  
+This cycle repeats continuously.
+________________________________________
+DevOps Tools (Basic)
+•	Version Control → Git 
+•	CI/CD → Jenkins 
+•	Build Tools → Maven, Gradle 
+•	Configuration Mgmt → Ansible 
+•	Containerization → Docker 
+•	Orchestration → Kubernetes 
+•	Cloud → AWS, Azure 
+________________________________________
+ What is CI/CD?
+CI (Continuous Integration)
+•	Developers push code frequently 
+•	Code is automatically built & tested 
+CD (Continuous Delivery/Deployment)
+•	Code is automatically deployed to servers 
+________________________________________
+ Importance of Automation
+•	Reduces manual work 
+•	Saves time 
+•	Avoids human errors 
+________________________________________
+DevOps + Cloud
+DevOps works best with cloud platforms like:
+•	AWS 
+•	Azure 
+•	Google Cloud 
+ Cloud provides:
+•	Scalability 
+•	Flexibility 
+•	Pay-as-you-use 
+________________________________________
+ Key Concepts
+•	Infrastructure as Code (IaC) → Terraform 
+•	Monitoring → Prometheus, Grafana 
+•	Logging → ELK Stack 
+________________________________________
+ Benefits of DevOps
+•	Faster delivery 
+•	Better collaboration  
+•	Reliable systems 
+•	Continuous feedback
+________________________________________
+ Real-Time Example
+When you use apps like:
+•	Instagram 
+•	WhatsApp 
+ Updates come frequently without downtime → That’s  Devops
+
+-----------------------------------------------------------------------------------
+
+
+                          Linux
+Definition of linux
+Linux is an open-source, Unix-like operating system that manages hardware and software resources and allows users to interact through a Command Line Interface (CLI) or GUI.
+ Developed by Linus Torvalds (1991)
+________________________________________
+ Key Features of Linux
+•	Open-source (free to use) 
+•	Multi-user (many users at once) 
+•	Multitasking (run multiple programs) 
+•	Secure & stable 
+•	Portable (runs on many devices) 
+________________________________________
+ Linux Architecture (Simple)
+1.	Kernel → Core of OS (controls hardware) 
+2.	Shell → Interface between user & kernel 
+3.	File System → Stores data 
+4.	Applications → Software programs 
+________________________________________
+ Basic Linux Commands
+File & Directory Commands
+Command	Description
+pwd	Show current directory
+ls	List files
+ls -l	Detailed list
+cd dir	Change directory
+cd ..	Go back
+mkdir dir	Create folder
+rmdir dir	Remove empty folder
+rm file	Delete file
+rm -rf dir	Delete folder
+________________________________________
+ File Handling Commands
+Command	Description
+touch file	Create file
+cat file	Display content
+less file	View page by page
+head file	First 10 lines
+tail file	Last 10 lines
+cp file1 file2	Copy
+mv file1 file2	Move/Rename
+nano file	Edit file
+________________________________________
+ User Commands
+Command	Description
+whoami	Current user
+who	Logged users
+id	User ID info
+adduser name	Create user
+passwd	Set password
+su	Switch user
+________________________________________
+ Permissions Commands
+Command	Description
+chmod	Change permissions
+chown	Change owner
+Example:
+chmod 755 file.sh
+________________________________________
+ Process Management
+Command	Description
+ps	Show processes
+top	Live processes
+htop	Advanced view
+kill pid	Stop process
+________________________________________
+ Network Commands
+Command	Description
+ping	Check connectivity
+ifconfig	Show IP
+ip a	IP details (modern)
+netstat	Network info
+ssh	Remote login
+________________________________________
+ Package Management
+ Amazon Linux / RHEL / CentOS
+yum install httpd
+ Ubuntu / Debian
+apt install apache2
+________________________________________
+ Disk & Memory Commands
+Command	Description
+df -h	Disk usage
+du -sh	Folder size
+free -m	Memory usage
+________________________________________
+ Important Command – grep
+ Used to search text inside files
+Syntax:
+grep "word" file.txt
+Examples:
+grep "error" logfile.txt
+grep -i "linux" file.txt   # ignore case
+grep -n "devops" file.txt # line numbers
+________________________________________
+Shortcuts
+•	Ctrl + C → Stop command 
+•	Ctrl + Z → Pause 
+•	Ctrl + L → Clear screen 
+•	history → Previous commands 
+________________________________________
+ Interview Points
+•	Linux is CLI-based OS 
+•	Kernel = heart of Linux 
+•	Shell = user interface 
+•	grep = text searching tool 
+•	Widely used in DevOps & Cloud 
+
+---------------------------------------------------------------------------------------------------
+
+
+                        Shell Scripting
+•	shell is a command-line interpreter in Linux. 
+•	Shell scripting is writing a set of commands in a file to automate tasks. 
+Example uses:
+•	Automation (backup, deployment) 
+•	System monitoring 
+•	DevOps tasks 
+________________________________________
+  Types of Shells
+•	Bash (Bourne Again Shell) – most common 
+•	Sh (Bourne Shell) 
+•	Ksh (Korn Shell) 
+•	Csh (C Shell) 
+ Mostly we use: bash
+________________________________________
+Basic Script Structure
+#!/bin/bash
+# This is a comment
+
+echo "Hello World"
+ Steps to run:
+chmod +x script.sh
+./script.sh
+________________________________________
+ Variables
+name="Tejasree"
+echo $name
+ Rules:
+•	No spaces around = 
+•	Use $ to access value 
+________________________________________
+ User Input
+echo "Enter your name:"
+read name
+echo "Hello $name"
+________________________________________
+Conditional Statements
+if condition
+if [ $a -gt 10 ]
+then
+  echo "Greater"
+else
+  echo "Smaller"
+fi
+ Operators:
+•	-eq → equal 
+•	-ne → not equal 
+•	-gt → greater 
+•	-lt → less 
+________________________________________
+  Loops
+for loop
+for i in 1 2 3
+do
+  echo $i
+done
+while loop
+i=1
+while [ $i -le 5 ]
+do
+  echo $i
+  ((i++))
+done
+________________________________________Functions
+function greet() {
+  echo "Hello"
+}
+
+greet
+________________________________________
+ Arguments (Command Line Inputs)
+echo $1
+echo $2
+ Run:
+./script.sh Teja DevOps
+________________________________________
+ Exit Status
+echo $?
+ 0 → success
+ non-zero → error
+________________________________________
+ File Handling
+if [ -f file.txt ]
+then
+  echo "File exists"
+fi
+ File checks:
+•	-f → file exists 
+•	-d → directory exists 
+________________________________________
+  Useful Commands in Scripts
+•	echo → print 
+•	read → input 
+•	date → current date 
+•	pwd → present directory 
+•	ls → list files 
+________________________________________
+ Simple Example Script
+#!/bin/bash
+
+echo "Enter number:"
+read num
+
+if [ $num -gt 10 ]
+then
+  echo "Number is greater than 10"
+else
+  echo "Number is less than or equal to 10"
+fi
+________________________________________
+ Real-Time Use Cases (Important for DevOps)
+•	Auto deployment scripts 
+•	Backup scripts 
+•	Log cleanup 
+•	Server health check 
+•	Cron jobs automation 
+________________________________________
+ Crontab (Scheduling)
+crontab -e
+Example:
+0 2 * * * /home/user/script.sh
+ Runs daily at 2 AM
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+

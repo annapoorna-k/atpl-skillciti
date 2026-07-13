@@ -1,0 +1,143 @@
+1. Introduction
+
+	*Terraform* is an open-source Infrastructure as Code (IaC) tool used to create, manage, and automate cloud infrastructure.
+	* Developed by: HashiCorp
+	* Works with cloud providers like AWS, Azure, GCP
+	* Uses a declarative language called **HCL (HashiCorp Configuration Language)*
+
+2. What is Infrastructure as Code (IaC)?
+
+	Infrastructure as Code means managing infrastructure using code instead of manual setup.
+
+	# Example:
+
+	Instead of manually creating:
+
+	* EC2 instances
+	* Networks
+	* Storage
+
+	You write code to automate everything.
+
+3. Key Features of Terraform
+
+	* Declarative configuration
+	* Multi-cloud support
+	* Automation
+	* Version control integration
+	* Idempotency (no duplicate resources)
+
+
+4. Terraform Workflow
+
+	# Step 1: Write Configuration
+
+	Create `.tf` file with infrastructure code.
+
+	# Step 2: Initialize
+
+	```
+	terraform init
+	```
+
+	Downloads required plugins.
+
+	# Step 3: Plan
+
+	```
+	terraform plan
+	```
+
+	Shows what changes will be made.
+
+	# Step 4: Apply
+
+	```
+	terraform apply
+	```
+
+	Creates infrastructure.
+
+	# Step 5: Destroy
+
+	```
+	terraform destroy
+	```
+
+	Deletes infrastructure.
+
+
+ 5. Terraform Components
+
+	✔ Provider
+
+	Defines the cloud platform.
+
+	```
+	provider "aws" {
+	  region = "ap-south-1"
+	}
+	```
+
+	 ✔ Resource
+
+	Defines what to create.
+
+	```
+	resource "aws_instance" "myec2" {
+	}
+	```
+
+	 ✔ Data Source
+
+	Fetches existing information.
+
+	```
+	data "aws_ami" "example" {
+	}
+	```
+	 ✔ Variables
+
+	Used for dynamic values.
+
+	```
+	variable "instance_type" {
+	  default = "t2.micro"
+	}
+	
+	✔ Output
+
+	Displays results after execution.
+
+	```
+	output "instance_id" {
+	  value = aws_instance.myec2.id
+	}
+	```
+
+ 6. Terraform State
+
+	Terraform stores infrastructure details in:
+
+	```
+	terraform.tfstate
+	```
+
+	# Purpose:
+
+	* Tracks created resources
+	* Maintains mapping between code and real infrastructure
+
+	# Types:
+
+	* Local state
+	* Remote state (S3 recommended)
+
+	
+
+ 7. Terraform Architecture
+
+	1. Configuration files (`.tf`)
+	2. Terraform Core
+	3. Provider plugins
+	4. Cloud APIs
